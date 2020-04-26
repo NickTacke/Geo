@@ -1,6 +1,10 @@
 -- Gui to Lua
 -- Version: 3.1
 
+--Important Variables
+
+local gameListLink = "https://raw.githubusercontent.com/NickTacke/Geo/master/GameList.lua?token=AKUUHVQ74KVSON2SAPPWJN26V2IQ4"
+
 -- Instances:
 
 local Geo = Instance.new("ScreenGui")
@@ -143,9 +147,11 @@ GameName.BorderSizePixel = 0
 GameName.Position = UDim2.new(0.505208313, 0, 0.319031239, 0)
 GameName.Size = UDim2.new(0, 192, 0, 33)
 GameName.Font = Enum.Font.SourceSans
-GameName.Text = "Game Name"
 GameName.TextColor3 = Color3.fromRGB(114, 187, 185)
 GameName.TextSize = 20.000
+
+local gameName = loadstring(game:HttpGet(gameListLink))()[game.GameId]
+GameName.Text = gameName
 
 SettingsFrame.Name = "SettingsFrame"
 SettingsFrame.Parent = ButtonContainer
