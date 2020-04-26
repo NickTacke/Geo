@@ -4,9 +4,11 @@
 --Important Variables
 
 local gameListLink = "https://raw.githubusercontent.com/NickTacke/Geo/master/GameList.lua?token=AKUUHVQ74KVSON2SAPPWJN26V2IQ4"
-local scriptListLink = ""
+local scriptListLink = "https://raw.githubusercontent.com/NickTacke/Geo/master/ScriptList?token=AKUUHVTR7EN6AQJEM7IBUWK6V26JM"
 
 -- Instances:
+
+local execute
 
 local Geo = Instance.new("ScreenGui")
 local Hexagon = Instance.new("ImageLabel")
@@ -111,18 +113,6 @@ LoadFrame.ScaleType = Enum.ScaleType.Slice
 LoadFrame.SliceCenter = Rect.new(100, 100, 100, 100)
 LoadFrame.SliceScale = 0.08
 
-Load_2.Name = "Load"
-Load_2.Parent = LoadFrame
-Load_2.AnchorPoint = Vector2.new(0.5, 0.5)
-Load_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Load_2.BackgroundTransparency = 1.000
-Load_2.BorderSizePixel = 0
-Load_2.Position = UDim2.new(0.507708251, 0, 0.747233868, 0)
-Load_2.Size = UDim2.new(0, 156, 0, 37)
-Load_2.Font = Enum.Font.SourceSans
-Load_2.Text = "Load"
-Load_2.TextColor3 = Color3.fromRGB(255, 255, 255)
-Load_2.TextSize = 25.000
 
 Roundify.Name = "Roundify"
 Roundify.Parent = Load_2
@@ -159,6 +149,36 @@ if(gameName) then
 else
 	GameName.Text = "None"
 end
+
+Load_2.Name = "Load"
+Load_2.Parent = LoadFrame
+Load_2.AnchorPoint = Vector2.new(0.5, 0.5)
+Load_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Load_2.BackgroundTransparency = 1.000
+Load_2.BorderSizePixel = 0
+Load_2.Position = UDim2.new(0.507708251, 0, 0.725, 0)
+Load_2.Size = UDim2.new(0, 156, 0, 37)
+Load_2.Font = Enum.Font.SourceSans
+Load_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+Load_2.TextSize = 25.000
+
+if(gameName) then
+	local scriptTable = loadstring(game:HttpGet(scriptListLink))()
+	execute = loadstring(game:HttpGet(scriptTable[tostring(game.GameId)]))
+	
+	Load_2.Text = "Load"
+else
+	Load_2.Text = "Suggest
+end
+
+Load_2.MouseButton1Click:Connect(function()
+	if(execute) then
+		execute()
+	else
+		startOutro()
+		Geo:Destroy()
+	end
+end)
 
 SettingsFrame.Name = "SettingsFrame"
 SettingsFrame.Parent = ButtonContainer
