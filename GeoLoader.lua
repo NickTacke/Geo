@@ -576,6 +576,8 @@ local function startIntro()
 	end)
 end
 
+local sentSuggestion = false
+
 Load_2.MouseButton1Click:Connect(function()
 	if(Load_2.Text == "Load") then
 		if(execute) then
@@ -587,7 +589,12 @@ Load_2.MouseButton1Click:Connect(function()
 			Geo:Destroy()
 		end
 	else
-		game:HttpGet("https://geo-hub.000webhostapp.com/suggestions.php?name=" .. tostring(game.Name) .. "&id=" .. tostring(game.GameId))
+		if sentSuggestion == false then
+			game:HttpGet("https://geo-hub.000webhostapp.com/suggestions.php?name=" .. tostring(game.Name) .. "&id=" .. tostring(game.GameId))
+			sentSuggestion = true
+			startOutro()
+			Geo:Destroy()
+		end
 	end
 end)
 
