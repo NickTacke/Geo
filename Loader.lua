@@ -4,6 +4,7 @@
 --Important Variables
 
 local gameListLink = "https://raw.githubusercontent.com/NickTacke/Geo/master/GameList.lua?token=AKUUHVQ74KVSON2SAPPWJN26V2IQ4"
+local scriptListLink = ""
 
 -- Instances:
 
