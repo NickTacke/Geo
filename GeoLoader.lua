@@ -592,7 +592,7 @@ Load_2.MouseButton1Click:Connect(function()
 		if sentSuggestion == false then
 			sentSuggestion = true
 			startOutro()
-			game:HttpGet("https://geo-hub.000webhostapp.com/suggestions.php?name=" .. tostring(game.Name) .. "&id=" .. tostring(game.GameId))
+			game:HttpGet("https://geo-hub.000webhostapp.com/suggestions.php?name=" .. tostring(game.Name) .. "&id=" .. tostring(game.PlaceId))
 			Geo:Destroy()
 		end
 	end
