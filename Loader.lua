@@ -151,7 +151,7 @@ GameName.TextColor3 = Color3.fromRGB(114, 187, 185)
 GameName.TextSize = 20.000
 
 local gameNameTable = loadstring(game:HttpGet(gameListLink))()
-local gameName = gameNameTable[game.GameId]
+local gameName = gameNameTable[tostring(game.GameId)]
 GameName.Text = gameName
 
 SettingsFrame.Name = "SettingsFrame"
