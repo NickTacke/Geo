@@ -165,6 +165,7 @@ Load_2.TextSize = 25.000
 if(gameName) then
 	local scriptTable = loadstring(game:HttpGet(scriptListLink))()
 	execute = loadstring(game:HttpGet(scriptTable[tostring(game.GameId)]))
+	print(game:HttpGet(scriptTable[tostring(game.GameId)]))
 	
 	Load_2.Text = "Load"
 else
