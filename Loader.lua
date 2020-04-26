@@ -35,7 +35,7 @@ local ImageLabel_3 = Instance.new("ImageLabel")
 --Properties:
 
 Geo.Name = "Geo"
-Geo.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+Geo.Parent = game:GetService("CoreGui")
 
 
 Hexagon.Name = "Hexagon"
