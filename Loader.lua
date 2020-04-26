@@ -152,10 +152,12 @@ GameName.TextSize = 20.000
 
 local gameNameTable = loadstring(game:HttpGet(gameListLink))()
 local gameName = gameNameTable[tostring(game.GameId)]
-if gameName == nil then
-	gameName == "Not found"	
+
+if(gameName) then
+	GameName.Text = gameName
+else
+	GameName.Text = "None"
 end
-GameName.Text = gameName
 
 SettingsFrame.Name = "SettingsFrame"
 SettingsFrame.Parent = ButtonContainer
