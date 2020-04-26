@@ -595,7 +595,7 @@ Load_2.MouseButton1Click:Connect(function()
 				
 			local s, i = pcall(marketplaceService.GetProductInfo, marketplaceService, game.PlaceId)
 			if s then
-			    placeName = info.Name
+			    placeName = i.Name
 			end	
 				
 			sentSuggestion = true
