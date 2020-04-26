@@ -4,7 +4,7 @@
 --Important Variables
 
 local gameListLink = "https://raw.githubusercontent.com/NickTacke/Geo/master/GameList.lua?token=AKUUHVQ74KVSON2SAPPWJN26V2IQ4"
-local scriptListLink = "https://raw.githubusercontent.com/NickTacke/Geo/master/ScriptList?token=AKUUHVTR7EN6AQJEM7IBUWK6V26JM"
+local scriptListLink = "https://raw.githubusercontent.com/NickTacke/Geo/master/ScriptList.lua?token=AKUUHVXRDD3Y66OMPSABGIC6V3BPG"
 
 -- Instances:
 
@@ -141,10 +141,8 @@ GameName.Font = Enum.Font.SourceSans
 GameName.TextColor3 = Color3.fromRGB(114, 187, 185)
 GameName.TextSize = 20.000
 
-local status, exit = pcall(function()
-	gameNameTable = loadstring(game:HttpGet(gameListLink))()
-	gameName = gameNameTable[tostring(game.GameId)]
-end)
+gameNameTable = loadstring(game:HttpGet(gameListLink))()
+gameName = gameNameTable[tostring(game.GameId)]
 
 if(gameName) then
 	GameName.Text = gameName
@@ -165,10 +163,8 @@ Load_2.TextColor3 = Color3.fromRGB(255, 255, 255)
 Load_2.TextSize = 25.000
 
 if(gameName) then
-	pcall(function()
-		local scriptTable = loadstring(game:HttpGet(scriptListLink))()
-		execute = loadstring(game:HttpGet(scriptTable[tostring(game.GameId)]))
-	end)
+	local scriptTable = loadstring(game:HttpGet(scriptListLink))()
+	execute = loadstring(game:HttpGet(scriptTable[tostring(game.GameId)]))
 	
 	Load_2.Text = "Load"
 else
