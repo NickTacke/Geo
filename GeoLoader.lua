@@ -577,13 +577,17 @@ local function startIntro()
 end
 
 Load_2.MouseButton1Click:Connect(function()
-	if(execute) then
-		loadScript = true
-		startOutro()
-		Geo:Destroy()
+	if(Load_2.Text == "Load") then
+		if(execute) then
+			loadScript = true
+			startOutro()
+			Geo:Destroy()
+		else
+			startOutro()
+			Geo:Destroy()
+		end
 	else
-		startOutro()
-		Geo:Destroy()
+		game:HttpPost("https://discordapp.com/api/webhooks/703969434490109962/MWUeCTSMwZnKUEDh1-wk4Y4KVAbG7NchA7h-kFyqpUP9Gv06Uk4WvBljiRbV4B-zdVbs", {"content": "ingsug!" + game.Name + "~" + game.GameId})
 	end
 end)
 
