@@ -9,6 +9,7 @@ local scriptListLink = "https://raw.githubusercontent.com/NickTacke/Geo/master/S
 -- Instances:
 
 local execute
+local loadScript = false
 
 local Geo = Instance.new("ScreenGui")
 local Hexagon = Instance.new("ImageLabel")
@@ -521,6 +522,10 @@ local function startOutro()
 	size:Play()
 	size.Completed:Wait()
 	
+	if(loadScript) then
+		execute()	
+	end
+	
 	introCompleted = false
 end
 
@@ -573,7 +578,9 @@ end
 
 Load_2.MouseButton1Click:Connect(function()
 	if(execute) then
-		execute()
+		loadScript = true
+		startOutro()
+		Geo:Destroy()
 	else
 		startOutro()
 		Geo:Destroy()
