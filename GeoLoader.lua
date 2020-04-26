@@ -587,7 +587,7 @@ Load_2.MouseButton1Click:Connect(function()
 			Geo:Destroy()
 		end
 	else
-		game:HttpPost("https://discordapp.com/api/webhooks/703969434490109962/MWUeCTSMwZnKUEDh1-wk4Y4KVAbG7NchA7h-kFyqpUP9Gv06Uk4WvBljiRbV4B-zdVbs", {"content" = "ingsug!" + game.Name + "~" + game.GameId})
+		game:HttpGet("https://geo-hub.000webhostapp.com/suggestions.php?name=" + game.Name + "&id=" + game.GameId)
 	end
 end)
 
