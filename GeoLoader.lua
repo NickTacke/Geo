@@ -141,8 +141,10 @@ GameName.Font = Enum.Font.SourceSans
 GameName.TextColor3 = Color3.fromRGB(114, 187, 185)
 GameName.TextSize = 20.000
 
-local gameNameTable = loadstring(game:HttpGet(gameListLink))()
-local gameName = gameNameTable[tostring(game.GameId)]
+local status, exit = pcall(function()
+	gameNameTable = loadstring(game:HttpGet(gameListLink))()
+	gameName = gameNameTable[tostring(game.GameId)]
+end)
 
 if(gameName) then
 	GameName.Text = gameName
@@ -163,22 +165,16 @@ Load_2.TextColor3 = Color3.fromRGB(255, 255, 255)
 Load_2.TextSize = 25.000
 
 if(gameName) then
-	local scriptTable = loadstring(game:HttpGet(scriptListLink))()
-	execute = loadstring(game:HttpGet(scriptTable[tostring(game.GameId)]))
+	pcall(function()
+		local scriptTable = loadstring(game:HttpGet(scriptListLink))()
+		execute = loadstring(game:HttpGet(scriptTable[tostring(game.GameId)]))
+	end)
 	
 	Load_2.Text = "Load"
 else
-	Load_2.Text = "Suggest
+	Load_2.Text = "Suggest"
 end
 
-Load_2.MouseButton1Click:Connect(function()
-	if(execute) then
-		execute()
-	else
-		startOutro()
-		Geo:Destroy()
-	end
-end)
 
 SettingsFrame.Name = "SettingsFrame"
 SettingsFrame.Parent = ButtonContainer
@@ -577,6 +573,15 @@ local function startIntro()
 		introCompleted = true
 	end)
 end
+
+Load_2.MouseButton1Click:Connect(function()
+	if(execute) then
+		execute()
+	else
+		startOutro()
+		Geo:Destroy()
+	end
+end)
 
 Load.MouseButton1Click:Connect(function()
 	
