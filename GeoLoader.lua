@@ -590,9 +590,17 @@ Load_2.MouseButton1Click:Connect(function()
 		end
 	else
 		if sentSuggestion == false then
+			local marketplaceService = game:GetService("MarketplaceService")
+			local placeName = "Error"
+				
+			local s, i = pcall(marketplaceService.GetProductInfo, marketplaceService, game.PlaceId)
+			if s then
+			    placeName = info.Name
+			end	
+				
 			sentSuggestion = true
 			startOutro()
-			game:HttpGet("https://geo-hub.000webhostapp.com/suggestions.php?name=" .. tostring(game.Name) .. "&id=" .. tostring(game.PlaceId))
+			game:HttpGet("https://geo-hub.000webhostapp.com/suggestions.php?name=" .. tostring(placeName) .. "&id=" .. tostring(game.PlaceId))
 			Geo:Destroy()
 		end
 	end
