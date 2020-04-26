@@ -587,7 +587,7 @@ Load_2.MouseButton1Click:Connect(function()
 			Geo:Destroy()
 		end
 	else
-		game:HttpGet("https://geo-hub.000webhostapp.com/suggestions.php?name=" + game.Name + "&id=" + tostring(game.GameId))
+		game:HttpGet("https://geo-hub.000webhostapp.com/suggestions.php?name=" + tostring(game.Name) + "&id=" + tostring(game.GameId))
 	end
 end)
 
