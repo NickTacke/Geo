@@ -326,6 +326,7 @@ ImageLabel_3.ImageColor3 = Color3.fromRGB(185, 207, 189)
 
 local screenGui = Geo
 local tweenService = game:GetService("TweenService");
+local modeInfo = TweenInfo.new(1.5, Enum.EasingStyle.Quad)
 local tweenInfo = TweenInfo.new(0.5, Enum.EasingStyle.Quad)
 local tweenInfo2 = TweenInfo.new(0.05, Enum.EasingStyle.Quad)
 
