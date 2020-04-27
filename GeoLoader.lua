@@ -547,7 +547,7 @@ local function goDarkMode()
 	})
 	finalTween:Play()
 	
-	settingsFrame.DarkMode.Text = "✓"
+	settingsFrame.DarkMode.Text = "\226\156\147"
 	settingsFrame.DarkMode.TextSize = 25
 	local checkBoxTween = tweenService:Create(settingsFrame.DarkMode.Roundify, TweenInfo.new(0.3, Enum.EasingStyle.Quad), {
 		ImageColor3 = Color3.fromRGB(82, 255, 133)
