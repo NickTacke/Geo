@@ -345,6 +345,7 @@ local settingsFrame = buttonContainer.SettingsFrame
 local introCompleted = false
 local frameDown = "None"
 
+local isDarkMode = false
 
 local function ButtonSizeTween(button, power)
 	local initSize = button.Size
@@ -401,6 +402,162 @@ local function setInitValues()
 	ButtonSizeTween(settingsFrame.AutoLoad, 2)
 
 end
+
+local function goWhiteMode()
+	--[[
+	hexagon.ImageColor3 = Color3.fromRGB(18, 15, 54)
+	
+	buttonContainer.ImageColor3 = Color3.fromRGB(18, 15, 54)
+	
+	logo.ImageColor3 = Color3.fromRGB(98, 114, 255)
+	
+	Load.ImageColor3 = Color3.fromRGB(98, 114, 255)
+	Settings.ImageColor3 = Color3.fromRGB(98, 114, 255)
+	Close.ImageColor3 = Color3.fromRGB(98, 114, 255)
+	
+	loadFrame.ImageColor3 = Color3.fromRGB(18, 15, 54)
+	settingsFrame.ImageColor3 = Color3.fromRGB(18, 15, 54)
+	
+	loadFrame.GameName.TextColor3 = Color3.fromRGB(99, 148, 255)
+	loadFrame.Load.Roundify.ImageColor3 = Color3.fromRGB(77, 90, 200)
+	
+	settingsFrame.DarkModeLabel.TextColor3 = Color3.fromRGB(99, 148, 255)
+	settingsFrame.AutoLoadLabel.TextColor3 = Color3.fromRGB(99, 148, 255)
+	]]--
+	
+	tweenService:Create(hexagon, modeInfo, {
+		ImageColor3 = Color3.fromRGB(255, 255, 255)
+	}):Play()
+	
+	tweenService:Create(buttonContainer, modeInfo, {
+		ImageColor3 = Color3.fromRGB(255, 255, 255)
+	}):Play()
+	
+	tweenService:Create(logo, modeInfo, {
+		ImageColor3 = Color3.fromRGB(255, 255, 255)
+	}):Play()
+	
+	tweenService:Create(Load, modeInfo, {
+		ImageColor3 = Color3.fromRGB(255, 255, 255)
+	}):Play()
+	tweenService:Create(Settings, modeInfo, {
+		ImageColor3 = Color3.fromRGB(255, 255, 255)
+	}):Play()
+	tweenService:Create(Close, modeInfo, {
+		ImageColor3 = Color3.fromRGB(255, 255, 255)
+	}):Play()
+	
+	tweenService:Create(loadFrame, modeInfo, {
+		ImageColor3 = Color3.fromRGB(255, 255, 255)
+	}):Play()
+	tweenService:Create(settingsFrame, modeInfo, {
+		ImageColor3 = Color3.fromRGB(255, 255, 255)
+	}):Play()
+	
+	tweenService:Create(loadFrame.GameName, modeInfo, {
+		TextColor3 = Color3.fromRGB(114, 187, 185)
+	}):Play()
+	tweenService:Create(loadFrame.Load.Roundify, modeInfo, {
+		ImageColor3 = Color3.fromRGB(125, 187, 185)
+	}):Play()
+	
+	tweenService:Create(settingsFrame.DarkModeLabel, modeInfo, {
+		TextColor3 = Color3.fromRGB(115, 187, 185)
+	}):Play()
+	local finalTween = tweenService:Create(settingsFrame.AutoLoadLabel, modeInfo, {
+		TextColor3 = Color3.fromRGB(115, 187, 185)
+	})
+	finalTween:Play()
+		
+	settingsFrame.DarkMode.Text = "x"
+	settingsFrame.DarkMode.TextSize = 30
+	local checkBoxTween = tweenService:Create(settingsFrame.DarkMode.Roundify, TweenInfo.new(0.3, Enum.EasingStyle.Quad), {
+		ImageColor3 = Color3.fromRGB(252, 64, 52)
+	})
+	checkBoxTween:Play()
+	checkBoxTween.Completed:Wait()
+	
+	finalTween.Completed:Wait()
+end
+
+local function goDarkMode()
+	--[[
+	hexagon.ImageColor3 = Color3.fromRGB(18, 15, 54)
+	
+	buttonContainer.ImageColor3 = Color3.fromRGB(18, 15, 54)
+	
+	logo.ImageColor3 = Color3.fromRGB(98, 114, 255)
+	
+	Load.ImageColor3 = Color3.fromRGB(98, 114, 255)
+	Settings.ImageColor3 = Color3.fromRGB(98, 114, 255)
+	Close.ImageColor3 = Color3.fromRGB(98, 114, 255)
+	
+	loadFrame.ImageColor3 = Color3.fromRGB(18, 15, 54)
+	settingsFrame.ImageColor3 = Color3.fromRGB(18, 15, 54)
+	
+	loadFrame.GameName.TextColor3 = Color3.fromRGB(99, 148, 255)
+	loadFrame.Load.Roundify.ImageColor3 = Color3.fromRGB(77, 90, 200)
+	
+	settingsFrame.DarkModeLabel.TextColor3 = Color3.fromRGB(99, 148, 255)
+	settingsFrame.AutoLoadLabel.TextColor3 = Color3.fromRGB(99, 148, 255)
+	]]--
+	
+	tweenService:Create(hexagon, modeInfo, {
+		ImageColor3 = Color3.fromRGB(18, 15, 54)
+	}):Play()
+	
+	tweenService:Create(buttonContainer, modeInfo, {
+		ImageColor3 = Color3.fromRGB(18, 15, 54)
+	}):Play()
+	
+	tweenService:Create(logo, modeInfo, {
+		ImageColor3 = Color3.fromRGB(98, 114, 255)
+	}):Play()
+	
+	tweenService:Create(Load, modeInfo, {
+		ImageColor3 = Color3.fromRGB(98, 114, 255)
+	}):Play()
+	tweenService:Create(Settings, modeInfo, {
+		ImageColor3 = Color3.fromRGB(98, 114, 255)
+	}):Play()
+	tweenService:Create(Close, modeInfo, {
+		ImageColor3 = Color3.fromRGB(98, 114, 255)
+	}):Play()
+	
+	tweenService:Create(loadFrame, modeInfo, {
+		ImageColor3 = Color3.fromRGB(18, 15, 54)
+	}):Play()
+	tweenService:Create(settingsFrame, modeInfo, {
+		ImageColor3 = Color3.fromRGB(18, 15, 54)
+	}):Play()
+	
+	tweenService:Create(loadFrame.GameName, modeInfo, {
+		TextColor3 = Color3.fromRGB(99, 148, 255)
+	}):Play()
+	tweenService:Create(loadFrame.Load.Roundify, modeInfo, {
+		ImageColor3 = Color3.fromRGB(77, 90, 200)
+	}):Play()
+	
+	tweenService:Create(settingsFrame.DarkModeLabel, modeInfo, {
+		TextColor3 = Color3.fromRGB(99, 148, 255)
+	}):Play()
+	local finalTween = tweenService:Create(settingsFrame.AutoLoadLabel, modeInfo, {
+		TextColor3 = Color3.fromRGB(99, 148, 255)
+	})
+	finalTween:Play()
+	
+	settingsFrame.DarkMode.Text = "✓"
+	settingsFrame.DarkMode.TextSize = 25
+	local checkBoxTween = tweenService:Create(settingsFrame.DarkMode.Roundify, TweenInfo.new(0.3, Enum.EasingStyle.Quad), {
+		ImageColor3 = Color3.fromRGB(82, 255, 133)
+	})
+	checkBoxTween:Play()
+	checkBoxTween.Completed:Wait()
+	
+	
+	finalTween.Completed:Wait()
+end
+
 
 local function startOutro()
 	if(frameDown ~= "None") then
@@ -759,6 +916,16 @@ Close.MouseButton1Click:Connect(function()
 	screenGui:Destroy()
 end)
 
+settingsFrame.DarkMode.MouseButton1Click:Connect(function()
+	if(isDarkMode) then
+		goWhiteMode()
+		isDarkMode = false
+	else
+		goDarkMode()
+		isDarkMode = true			
+	end
+end)
+
 setInitValues()
-wait(1)
+wait(0.5)
 startIntro()
