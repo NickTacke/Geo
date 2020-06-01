@@ -37,15 +37,19 @@ function GeoUI:Init()
 
         Main.Windows.Count = Main.Windows.Count + 1
 
-        local Window = Instance.new("Frame", GeoGui)
-        Window.Size = UDim2.new(0, 140, 0, 200)
+        local Window = Instance.new("ImageLabel", GeoGui)
+        Window.Size = UDim2.new(0, 140, 0, 30)
         if(Main.Windows.Count ~= 1) then
             Window.Position = UDim2.new(0, (100 * Main.Windows.Count) + (Main.Windows.Count * Window.Size.X.Offset) - Window.Size.X.Offset, 0, 350)
         else
             Window.Position = UDim2.new(0, (100 * Main.Windows.Count), 0, 350)
         end
-        Window.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        Window.BackgroundTransparency = 1
         Window.BorderSizePixel = 0
+        Window.Image = "rbxassetid://3570695787"
+        Window.ScaleType = "Slice"
+        Window.SliceCenter = Rect.new(100,100,100,100)
+        Window.SliceScale = 0.02
 
         local TitleLabel = Instance.new("TextLabel", Window)
         TitleLabel.Text = Title
@@ -55,8 +59,8 @@ function GeoUI:Init()
 
         local DividerLine = Instance.new("Frame", Window)
         DividerLine.BorderSizePixel = 0
-        DividerLine.Size = UDim2.new(0, 130, 0, 1)
-        DividerLine.Position = UDim2.new(0, 5, 0, 28)
+        DividerLine.Size = UDim2.new(0, 125, 0, 1)
+        DividerLine.Position = UDim2.new(0, 7.5, 0, 25)
         DividerLine.BackgroundColor3 = Color3.fromRGB(114, 187, 185)
        
 
@@ -79,12 +83,13 @@ function GeoUI:Init()
 
             local Compartment = Instance.new("Frame", Window)
             Compartment.Size = UDim2.new(0, 140, 0, 30)
-            Compartment.Position = UDim2.new(0, 0, 0, IWindow.Elements * 30 + 5)
+            Compartment.Position = UDim2.new(0, 0, 0, IWindow.Elements * 30)
             Compartment.BackgroundTransparency = 1
+            Compartment.BorderSizePixel = 0
 
             local MainText = Instance.new("TextLabel", Compartment)
             MainText.Text = Text
-            MainText.Position = UDim2.new(0, 8, 0, 5)
+            MainText.Position = UDim2.new(0, 8, 0, 0)
             MainText.Size = UDim2.new(0, 80, 0, 30)
             MainText.BackgroundTransparency = 1
             MainText.TextXAlignment = Enum.TextXAlignment.Left
@@ -92,23 +97,35 @@ function GeoUI:Init()
 
             local CheckBox = Instance.new("TextButton", Compartment)
             CheckBox.Size = UDim2.new(0, 15, 0, 15)
-            CheckBox.Position = UDim2.new(0, 140 - (CheckBox.Size.X.Offset + 10), 0, 30 - (CheckBox.Size.Y.Offset + 5))
+            CheckBox.Position = UDim2.new(0, 140 - (CheckBox.Size.X.Offset + 10), 0, 30 - (CheckBox.Size.Y.Offset + 7.5))
+            CheckBox.BackgroundTransparency = 1
+            CheckBox.ZIndex = 2
+            CheckBox.TextColor3 = Color3.fromRGB(255,255,255)
+            local CheckBoxRoundify = Instance.new("ImageLabel", Compartment)
+            CheckBoxRoundify.Size = UDim2.new(0, 15, 0, 15)
+            CheckBoxRoundify.Position = UDim2.new(0, 140 - (CheckBox.Size.X.Offset + 10), 0, 30 - (CheckBox.Size.Y.Offset + 7.5))
+            CheckBoxRoundify.Image = "rbxassetid://3570695787"
+            CheckBoxRoundify.ScaleType = "Slice"
+            CheckBoxRoundify.SliceCenter = Rect.new(100,100,100,100)
+            CheckBoxRoundify.SliceScale = 0.04
+            CheckBoxRoundify.ImageColor3 = Color3.fromRGB(252, 64, 52)
+            CheckBoxRoundify.BackgroundTransparency = 1
+            CheckBoxRoundify.ZIndex = 1
+
             if(IToggle.Value == false) then
                 CheckBox.Text = "x"
-                CheckBox.BackgroundColor3 = Color3.fromRGB(252, 64, 52)
+                CheckBoxRoundify.BackgroundColor3 = Color3.fromRGB(252, 64, 52)
             else
                 CheckBox.Text = "\226\156\147"
-                CheckBox.BackgroundColor3 = Color3.fromRGB(82, 255, 133)
+                CheckBoxRoundify.BackgroundColor3 = Color3.fromRGB(82, 255, 133)
             end
-            CheckBox.BorderSizePixel = 0
-            CheckBox.TextColor3 = Color3.fromRGB(255,255,255)
 
             CheckBox.MouseButton1Click:Connect(function()
                 if(IToggle.Value == false) then
 
                     CheckBox.Text = "\226\156\147"
-                    local EnableTween = tweenService:Create(CheckBox, TweenInfo.new(0.3, Enum.EasingStyle.Quad), {
-                        BackgroundColor3 = Color3.fromRGB(82, 255, 133)
+                    local EnableTween = tweenService:Create(CheckBoxRoundify, TweenInfo.new(0.3, Enum.EasingStyle.Quad), {
+                        ImageColor3 = Color3.fromRGB(82, 255, 133)
                     })
                     EnableTween:Play()
 
@@ -121,8 +138,8 @@ function GeoUI:Init()
                 else
 
                     CheckBox.Text = "x"
-                    local DisableTween = tweenService:Create(CheckBox, TweenInfo.new(0.3, Enum.EasingStyle.Quad), {
-                        BackgroundColor3 = Color3.fromRGB(252, 64, 52)
+                    local DisableTween = tweenService:Create(CheckBoxRoundify, TweenInfo.new(0.3, Enum.EasingStyle.Quad), {
+                        ImageColor3 = Color3.fromRGB(252, 64, 52)
                     })
                     DisableTween:Play()
 
@@ -134,6 +151,12 @@ function GeoUI:Init()
 
                 end
             end)
+
+            if(IWindow.Elements == 1) then
+                Window.Size = UDim2.new(0, Window.Size.X.Offset, 0, Window.Size.Y.Offset + 35)
+            else
+                Window.Size = UDim2.new(0, Window.Size.X.Offset, 0, Window.Size.Y.Offset + 30)
+            end
 
             return IToggle
 
@@ -152,20 +175,39 @@ function GeoUI:Init()
 
             local Compartment = Instance.new("Frame", Window)
             Compartment.Size = UDim2.new(0, 140, 0, 30)
-            Compartment.Position = UDim2.new(0, 0, 0, IWindow.Elements * 30 + 5)
+            Compartment.Position = UDim2.new(0, 0, 0, IWindow.Elements * 30)
             Compartment.BackgroundTransparency = 1
+            Compartment.BorderSizePixel = 0
 
             local MainButton = Instance.new("TextButton", Compartment)
             MainButton.Size = UDim2.new(0, 120, 0, 26)
-            MainButton.Position = UDim2.new(0, 10, 0, 4)
+            MainButton.Position = UDim2.new(0, 10, 0, 2)
             MainButton.BorderSizePixel = 0
-            MainButton.BackgroundColor3 = Color3.fromRGB(114, 187, 185)
+            MainButton.BackgroundTransparency = 1
             MainButton.Text = Text
             MainButton.TextColor3 = Color3.fromRGB(255,255,255)
+            MainButton.ZIndex = 2
+
+            local MainButtonRoundify = Instance.new("ImageLabel", Compartment)
+            MainButtonRoundify.Size = UDim2.new(0, 120, 0, 26)
+            MainButtonRoundify.Position = UDim2.new(0, 10, 0, 2)
+            MainButtonRoundify.Image = "rbxassetid://3570695787"
+            MainButtonRoundify.ScaleType = "Slice"
+            MainButtonRoundify.SliceCenter = Rect.new(100,100,100,100)
+            MainButtonRoundify.SliceScale = 0.02
+            MainButtonRoundify.BackgroundTransparency = 1
+            MainButtonRoundify.ImageColor3 = Color3.fromRGB(114, 187, 185)
 
             MainButton.MouseButton1Click:Connect(function()
                 Callback()
             end)
+
+            if(IWindow.Elements == 1) then
+                Window.Size = UDim2.new(0, Window.Size.X.Offset, 0, Window.Size.Y.Offset + 35)
+            else
+                Window.Size = UDim2.new(0, Window.Size.X.Offset, 0, Window.Size.Y.Offset + 30)
+            end
+
 
             return IButton
 
