@@ -1,3 +1,5 @@
+
+
 local GeoUI = {}
 
 local tweenService = game:GetService("TweenService")
@@ -68,6 +70,8 @@ function GeoUI:Init()
 
             local IToggle = {}
 
+            IToggle.Checkmark = "\226\156\147"
+
             if(Default == nil) then
                 Default = false
             end
@@ -87,45 +91,62 @@ function GeoUI:Init()
             Compartment.BackgroundTransparency = 1
             Compartment.BorderSizePixel = 0
 
-            local MainText = Instance.new("TextLabel", Compartment)
-            MainText.Text = Text
-            MainText.Position = UDim2.new(0, 8, 0, 0)
-            MainText.Size = UDim2.new(0, 80, 0, 30)
-            MainText.BackgroundTransparency = 1
-            MainText.TextXAlignment = Enum.TextXAlignment.Left
-            MainText.TextColor3 = Color3.fromRGB(114, 187, 185)
-
+            
             local CheckBox = Instance.new("TextButton", Compartment)
-            CheckBox.Size = UDim2.new(0, 15, 0, 15)
-            CheckBox.Position = UDim2.new(0, 140 - (CheckBox.Size.X.Offset + 10), 0, 30 - (CheckBox.Size.Y.Offset + 7.5))
+            CheckBox.Size = UDim2.new(0, 120, 0, 26)
+            CheckBox.Position = UDim2.new(0, 10, 0, 2)
+            CheckBox.BorderSizePixel = 0
             CheckBox.BackgroundTransparency = 1
-            CheckBox.ZIndex = 2
+            CheckBox.Text = ""
             CheckBox.TextColor3 = Color3.fromRGB(255,255,255)
+            CheckBox.ZIndex = 2
+
+            local CheckBoxText = Instance.new("TextLabel", CheckBox)
+            CheckBoxText.Size = UDim2.new(0, 80, 0, 16)
+            CheckBoxText.Position = UDim2.new(0, 6, 0, 5)
+            CheckBoxText.Text = Text
+            CheckBoxText.ZIndex = 2
+            CheckBoxText.TextXAlignment = "Left"
+            CheckBoxText.BackgroundTransparency = 1
+            CheckBoxText.TextColor3 = Color3.fromRGB(255,255,255)
+
+            local CheckBoxStatus = Instance.new("TextLabel", CheckBox)
+            CheckBoxStatus.ZIndex = 2
+            CheckBoxStatus.Size = UDim2.new(0, 15, 0, 15)
+            CheckBoxStatus.Position = UDim2.new(0, 100, 0, 5)
+        
+            if(Default) then
+                CheckBoxStatus.Text = IToggle.Checkmark
+            else
+                CheckBoxStatus.Text = "x"
+            end
+
+            CheckBoxStatus.TextColor3 = Color3.fromRGB(255,255,255)
+            CheckBoxStatus.BackgroundTransparency = 1
+            CheckBoxStatus.TextSize = 12
+
             local CheckBoxRoundify = Instance.new("ImageLabel", Compartment)
-            CheckBoxRoundify.Size = UDim2.new(0, 15, 0, 15)
-            CheckBoxRoundify.Position = UDim2.new(0, 140 - (CheckBox.Size.X.Offset + 10), 0, 30 - (CheckBox.Size.Y.Offset + 7.5))
+            CheckBoxRoundify.Size = UDim2.new(0, 120, 0, 26)
+            CheckBoxRoundify.Position = UDim2.new(0, 10, 0, 2)
             CheckBoxRoundify.Image = "rbxassetid://3570695787"
             CheckBoxRoundify.ScaleType = "Slice"
             CheckBoxRoundify.SliceCenter = Rect.new(100,100,100,100)
-            CheckBoxRoundify.SliceScale = 0.04
-            CheckBoxRoundify.ImageColor3 = Color3.fromRGB(252, 64, 52)
+            CheckBoxRoundify.SliceScale = 0.02
             CheckBoxRoundify.BackgroundTransparency = 1
-            CheckBoxRoundify.ZIndex = 1
-
-            if(IToggle.Value == false) then
-                CheckBox.Text = "x"
-                CheckBoxRoundify.BackgroundColor3 = Color3.fromRGB(252, 64, 52)
+            if(Default) then
+                CheckBoxRoundify.ImageColor3 = Color3.fromRGB(53, 184, 112)
             else
-                CheckBox.Text = "\226\156\147"
-                CheckBoxRoundify.BackgroundColor3 = Color3.fromRGB(82, 255, 133)
+                CheckBoxRoundify.ImageColor3 = Color3.fromRGB(180, 64, 52)
             end
+
 
             CheckBox.MouseButton1Click:Connect(function()
                 if(IToggle.Value == false) then
 
-                    CheckBox.Text = "\226\156\147"
+                    CheckBoxStatus.Text = IToggle.Checkmark
+
                     local EnableTween = tweenService:Create(CheckBoxRoundify, TweenInfo.new(0.3, Enum.EasingStyle.Quad), {
-                        ImageColor3 = Color3.fromRGB(82, 255, 133)
+                        ImageColor3 = Color3.fromRGB(53, 184, 112)
                     })
                     EnableTween:Play()
 
@@ -137,9 +158,10 @@ function GeoUI:Init()
 
                 else
 
-                    CheckBox.Text = "x"
+                    CheckBoxStatus.Text = "x"
+
                     local DisableTween = tweenService:Create(CheckBoxRoundify, TweenInfo.new(0.3, Enum.EasingStyle.Quad), {
-                        ImageColor3 = Color3.fromRGB(252, 64, 52)
+                        ImageColor3 = Color3.fromRGB(180, 64, 52)
                     })
                     DisableTween:Play()
 
@@ -220,4 +242,14 @@ function GeoUI:Init()
     return Main
 end
 
-return GeoUI
+local Init = GeoUI:Init()
+
+local AttackWindow = Init.Windows:Create("Attack")
+
+AttackWindow:Toggle("Mod guns", function()
+    print("Mod guns")
+end, true)
+
+AttackWindow:Button("Give guns", function()
+    print("Give guns")
+end)
