@@ -242,14 +242,4 @@ function GeoUI:Init()
     return Main
 end
 
-local Init = GeoUI:Init()
-
-local AttackWindow = Init.Windows:Create("Attack")
-
-AttackWindow:Toggle("Mod guns", function()
-    print("Mod guns")
-end, true)
-
-AttackWindow:Button("Give guns", function()
-    print("Give guns")
-end)
+return GeoUI;
