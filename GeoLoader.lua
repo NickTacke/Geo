@@ -3,8 +3,8 @@
 
 --Important Variables
 
-local gameListLink = "https://raw.githubusercontent.com/NickTacke/Geo/master/GameList.lua?token=AKUUHVQ74KVSON2SAPPWJN26V2IQ4"
-local scriptListLink = "https://raw.githubusercontent.com/NickTacke/Geo/master/ScriptList.lua?token=AKUUHVXRDD3Y66OMPSABGIC6V3BPG"
+local gameListLink = "https://raw.githubusercontent.com/NickTacke/Geo/1beeec0cfa1674d9f355c1d4f04827dd7b9e1b57/GameList.lua?token=AKUUHVSLZBBFNHQDAPBHZVS664SBA"
+local scriptListLink = "https://raw.githubusercontent.com/NickTacke/Geo/master/ScriptList.lua?token=AKUUHVXRO3I6CJ5ZAA4YMIS664SD6"
 
 -- Instances:
 
