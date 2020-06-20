@@ -701,6 +701,9 @@ local function startOutro()
     
         if (splitVal[1] == tostring(os.date("*t")["day"] * 26 + os.date("*t")["month"] * 12 + os.date("*t")["min"] * 34) or splitVal[1] == tostring(os.date("*t")["day"] * 26 + os.date("*t")["month"] * 12 + os.date("*t")["min"] * 34 + 34) and splitVal[2] == tostring(string.byte("t") .. string.byte("r") .. string.byte("u") .. string.byte("e"))) then
 		    execute()
+
+			Geo:Destroy()
+			script:Destroy()
 		end
 	end
 	
