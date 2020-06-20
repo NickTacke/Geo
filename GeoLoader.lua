@@ -1,8 +1,4 @@
 
-<?php
-	die("forbidden access")
-?>
-
 -- Gui to Lua
 -- Version: 3.1
 
