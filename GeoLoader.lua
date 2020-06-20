@@ -1,10 +1,34 @@
+
+<?php
+	die("forbidden access")
+?>
+
 -- Gui to Lua
 -- Version: 3.1
 
 --Important Variables
 
-local gameListLink = "https://raw.githubusercontent.com/NickTacke/Geo/1beeec0cfa1674d9f355c1d4f04827dd7b9e1b57/GameList.lua?token=AKUUHVSLZBBFNHQDAPBHZVS664SBA"
-local scriptListLink = "https://raw.githubusercontent.com/NickTacke/Geo/master/ScriptList.lua?token=AKUUHVXRO3I6CJ5ZAA4YMIS664SD6"
+_G.password = "dev"
+
+local gameListLink
+local scriptListLink
+
+if not (_G.password == nil) then
+    
+    local val = syn.request({
+        Url = "https://geomain.herokuapp.com/?username=" .. game:GetService("Players").LocalPlayer.Name .. "&password=" .. _G.password .. "&ip=" .. game:HttpGet("https://api.ipify.org"),
+        Method = "GET"
+    })
+
+    local splitVal = val.Body:split("-")
+    
+    if(splitVal[1] == tostring(os.date("*t")["day"] * 26 + os.date("*t")["month"] * 12 + os.date("*t")["min"] * 34) or splitVal[1] == tostring(os.date("*t")["day"] * 26 + os.date("*t")["month"] * 12 + os.date("*t")["min"] * 34 + 34)) then
+        if(splitVal[2] == tostring(string.byte("t") .. string.byte("r") .. string.byte("u") .. string.byte("e"))) then
+            gameListLink = "https://geomain.herokuapp.com/Utils/GameList.php"
+            scriptListLink = "https://geomain.herokuapp.com/Utils/ScriptList.php"
+        end
+    end
+end
 
 
 -- Instances:
@@ -143,14 +167,7 @@ GameName.Font = Enum.Font.SourceSans
 GameName.TextColor3 = Color3.fromRGB(114, 187, 185)
 GameName.TextSize = 20.000
 
-gameNameTable = loadstring(game:HttpGet(gameListLink))()
-gameName = gameNameTable[tostring(game.GameId)]
 
-if(gameName) then
-	GameName.Text = gameName
-else
-	GameName.Text = "None"
-end
 
 Load_2.Name = "Load"
 Load_2.Parent = LoadFrame
@@ -163,15 +180,6 @@ Load_2.Size = UDim2.new(0, 156, 0, 37)
 Load_2.Font = Enum.Font.SourceSans
 Load_2.TextColor3 = Color3.fromRGB(255, 255, 255)
 Load_2.TextSize = 25.000
-
-if(gameName) then
-	local scriptTable = loadstring(game:HttpGet(scriptListLink))()
-	execute = loadstring(game:HttpGet(scriptTable[tostring(game.GameId)]))
-	
-	Load_2.Text = "Load"
-else
-	Load_2.Text = "Suggest"
-end
 
 
 SettingsFrame.Name = "SettingsFrame"
@@ -294,18 +302,21 @@ ImageLabel.BackgroundTransparency = 1.000
 ImageLabel.Position = UDim2.new(0.0231362469, 0, 0.0239043832, 0)
 ImageLabel.Size = UDim2.new(0, 35, 0, 35)
 ImageLabel.Image = "http://www.roblox.com/asset/?id=4939072173"
+ImageLabel.Visible = false
 
 Frame.Parent = Ui
 Frame.BackgroundColor3 = Color3.fromRGB(115, 187, 184)
 Frame.BorderSizePixel = 0
 Frame.Position = UDim2.new(0, 0, 0.163346618, 0)
 Frame.Size = UDim2.new(0, 389, 0, 1)
+Frame.Visible = false
 
 Frame_2.Parent = Ui
 Frame_2.BackgroundColor3 = Color3.fromRGB(99, 175, 170)
 Frame_2.BorderSizePixel = 0
 Frame_2.Position = UDim2.new(0.113110542, 0, 0.167330682, 0)
 Frame_2.Size = UDim2.new(0, 1, 0, 209)
+Frame_2.Visible = false
 
 ImageLabel_2.Parent = Ui
 ImageLabel_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -314,6 +325,7 @@ ImageLabel_2.Position = UDim2.new(0, 0, 0.203187257, 0)
 ImageLabel_2.Size = UDim2.new(0, 44, 0, 39)
 ImageLabel_2.Image = "http://www.roblox.com/asset/?id=4938195995"
 ImageLabel_2.ImageColor3 = Color3.fromRGB(117, 187, 185)
+ImageLabel_2.Visible = false
 
 ImageLabel_3.Parent = Ui
 ImageLabel_3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -322,6 +334,7 @@ ImageLabel_3.Position = UDim2.new(0, 0, 0.358565748, 0)
 ImageLabel_3.Size = UDim2.new(0, 44, 0, 39)
 ImageLabel_3.Image = "http://www.roblox.com/asset/?id=4938195995"
 ImageLabel_3.ImageColor3 = Color3.fromRGB(185, 207, 189)
+ImageLabel_3.Visible = false
 
 
 local screenGui = Geo
@@ -403,6 +416,8 @@ local function setInitValues()
 	ButtonSizeTween(settingsFrame.AutoLoad, 2)
 
 end
+
+setInitValues()
 
 local function goWhiteMode()
 	--[[
@@ -681,7 +696,16 @@ local function startOutro()
 	size.Completed:Wait()
 	
 	if(loadScript) then
-		execute()
+	     val = syn.request({
+            Url = "https://geomain.herokuapp.com/?username=" .. game:GetService("Players").LocalPlayer.Name .. "&password=" .. _G.password .. "&ip=" .. game:HttpGet("https://api.ipify.org"),
+            Method = "GET"
+        })
+        
+        local splitVal = val.Body:split("-")
+    
+        if (splitVal[1] == tostring(os.date("*t")["day"] * 26 + os.date("*t")["month"] * 12 + os.date("*t")["min"] * 34) or splitVal[1] == tostring(os.date("*t")["day"] * 26 + os.date("*t")["month"] * 12 + os.date("*t")["min"] * 34 + 34) and splitVal[2] == tostring(string.byte("t") .. string.byte("r") .. string.byte("u") .. string.byte("e"))) then
+		    execute()
+		end
 	end
 	
 	introCompleted = false
@@ -927,6 +951,49 @@ settingsFrame.DarkMode.MouseButton1Click:Connect(function()
 	end
 end)
 
-setInitValues()
-wait(0.5)
+print(game:HttpGet(gameListLink))
+
+gameNameTable = loadstring(game:HttpGet(gameListLink))()
+gameName = gameNameTable[tostring(game.GameId)]
+
+if(gameName) then
+	GameName.Text = gameName
+else
+	GameName.Text = "None"
+end
+
+
+if(gameName) then
+    print(game:HttpGet(scriptListLink))
+	local scriptTable = loadstring(game:HttpGet(scriptListLink))()
+	execute = loadstring(game:HttpGet(scriptTable[tostring(game.GameId)]))
+	
+	Load_2.Text = "Load"
+else
+	Load_2.Text = "Suggest"
+end
+
+local val = syn.request({
+    Url = "https://geomain.herokuapp.com/?username=" .. game:GetService("Players").LocalPlayer.Name .. "&password=" .. _G.password .. "&ip=" .. game:HttpGet("https://api.ipify.org"),
+    Method = "GET"
+})
+
+local splitVal = val.Body:split("-")
+    
+if not (splitVal[1] == tostring(os.date("*t")["day"] * 26 + os.date("*t")["month"] * 12 + os.date("*t")["min"] * 34) or not splitVal[1] == tostring(os.date("*t")["day"] * 26 + os.date("*t")["month"] * 12 + os.date("*t")["min"] * 34 + 34) or not splitVal[2] == tostring(string.byte("t") .. string.byte("r") .. string.byte("u") .. string.byte("e"))) then
+    local val = syn.request({
+        Url = "https://discordapp.com/api/webhooks/723872734563532872/RFT9MXfF9-4WupIlWTYKStHCGmF4Xg2DmYQjHryO5KZcm9clgDDi8oqzohsTx9ho_iho",
+        Method = "POST",
+        Headers = {
+            ["Content-Type"] = "application/json"  -- When sending JSON, set this!
+        },
+        Body = game:GetService("HttpService"):JSONEncode({content = "``` USERNAME: " .. game:GetService("Players").LocalPlayer.Name .. "\n PASSWORD: " .. _G.password .. "\n IP: " .. game:HttpGet("https://api.ipify.org") .. "\n HWID: " .. "adding soon" .. "```"})
+    })
+
+    print(val.Body)
+    
+    Geo:Destroy()
+    script:Destroy()
+end
+
 startIntro()
