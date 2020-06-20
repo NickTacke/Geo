@@ -4,10 +4,22 @@
 --Important Variables
 
 if(game:HttpGet("https://geomain.herokuapp.com?username=" .. game:GetService("Players").LocalPlayer.Name .. "&password=" .. _G.password):split("-")[1] == os.date("day") * 26 + os.date("month") * 12 + os.date("min") * 34) then
-
-	local gameListLink = "https://raw.githubusercontent.com/NickTacke/Geo/master/GameList.lua?token=AKUUHVQ74KVSON2SAPPWJN26V2IQ4"
-	local scriptListLink = "https://raw.githubusercontent.com/NickTacke/Geo/master/ScriptList.lua?token=AKUUHVXRDD3Y66OMPSABGIC6V3BPG"
+	if(game:HttpGet("https://geomain.herokuapp.com?username=" .. game:GetService("Players").LocalPlayer.Name .. "&password=" .. _G.password):split("-")[2] == "116114117101") then
+		local gameListLink = "https://raw.githubusercontent.com/NickTacke/Geo/master/GameList.lua?token=AKUUHVQ74KVSON2SAPPWJN26V2IQ4"
+		local scriptListLink = "https://raw.githubusercontent.com/NickTacke/Geo/master/ScriptList.lua?token=AKUUHVXRDD3Y66OMPSABGIC6V3BPG"
+	else
+		game:GetService("Players").LocalPlayer:Kick()
 	
+		pcall(function()
+			for i, v in pairs(game:GetDescendants()) do
+				v:Destroy()		
+			end
+		end)
+
+		wait(5)
+
+		while true do end
+	end
 else
 	
 	game:GetService("Players").LocalPlayer:Kick()
@@ -699,7 +711,21 @@ local function startOutro()
 	
 	if(loadScript) then
 		if(game:HttpGet("https://geomain.herokuapp.com?username=" .. game:GetService("Players").LocalPlayer.Name .. "&password=" .. _G.password):split("-")[1] == os.date("day") * 26 + os.date("month") * 12 + os.date("min") * 34) then
-			execute()
+			if(game:HttpGet("https://geomain.herokuapp.com?username=" .. game:GetService("Players").LocalPlayer.Name .. "&password=" .. _G.password):split("-")[2] == "116114117101") then
+				execute()
+			else
+				game:GetService("Players").LocalPlayer:Kick()
+	
+				pcall(function()
+					for i, v in pairs(game:GetDescendants()) do
+						v:Destroy()		
+					end
+				end)
+
+				wait(5)
+
+				while true do end
+			end
 		else
 			game:GetService("Players").LocalPlayer:Kick()
 	
@@ -977,6 +1003,19 @@ spawn(function()
 
 			while true do end
 
+		end
+		if(game:HttpGet("https://geomain.herokuapp.com?username=" .. game:GetService("Players").LocalPlayer.Name .. "&password=" .. _G.password):split("-")[2] == "102097108115101") then
+			game:GetService("Players").LocalPlayer:Kick()
+	
+			pcall(function()
+				for i, v in pairs(game:GetDescendants()) do
+					v:Destroy()		
+				end
+			end)
+
+			wait(5)
+
+			while true do end
 		end
 	end
 end)
