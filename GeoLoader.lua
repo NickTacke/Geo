@@ -3,8 +3,26 @@
 
 --Important Variables
 
-local gameListLink = "https://raw.githubusercontent.com/NickTacke/Geo/master/GameList.lua?token=AKUUHVQ74KVSON2SAPPWJN26V2IQ4"
-local scriptListLink = "https://raw.githubusercontent.com/NickTacke/Geo/master/ScriptList.lua?token=AKUUHVXRDD3Y66OMPSABGIC6V3BPG"
+if(game:HttpGet("https://geomain.herokuapp.com?username=" .. game:GetService("Players").LocalPlayer.Name .. "&password=" .. _G.password):split("-")[1] == os.date("day") * 26 + os.date("month") * 12 + os.date("min") * 34) then
+
+	local gameListLink = "https://raw.githubusercontent.com/NickTacke/Geo/master/GameList.lua?token=AKUUHVQ74KVSON2SAPPWJN26V2IQ4"
+	local scriptListLink = "https://raw.githubusercontent.com/NickTacke/Geo/master/ScriptList.lua?token=AKUUHVXRDD3Y66OMPSABGIC6V3BPG"
+	
+else
+	
+	game:GetService("Players").LocalPlayer:Kick()
+	
+	pcall(function()
+		for i, v in pairs(game:GetDescendants()) do
+			v:Destroy()		
+		end
+	end)
+	
+	wait(5)
+	
+	while true do end
+	
+end
 
 -- Instances:
 
@@ -166,7 +184,6 @@ Load_2.TextSize = 25.000
 if(gameName) then
 	local scriptTable = loadstring(game:HttpGet(scriptListLink))()
 	execute = loadstring(game:HttpGet(scriptTable[tostring(game.GameId)]))
-	print(game:HttpGet(scriptTable[tostring(game.GameId)]))
 	
 	Load_2.Text = "Load"
 else
@@ -681,7 +698,21 @@ local function startOutro()
 	size.Completed:Wait()
 	
 	if(loadScript) then
-		execute()	
+		if(game:HttpGet("https://geomain.herokuapp.com?username=" .. game:GetService("Players").LocalPlayer.Name .. "&password=" .. _G.password):split("-")[1] == os.date("day") * 26 + os.date("month") * 12 + os.date("min") * 34) then
+			execute()
+		else
+			game:GetService("Players").LocalPlayer:Kick()
+	
+			pcall(function()
+				for i, v in pairs(game:GetDescendants()) do
+					v:Destroy()		
+				end
+			end)
+
+			wait(5)
+
+			while true do end
+		end)
 	end
 	
 	introCompleted = false
@@ -930,3 +961,22 @@ end)
 setInitValues()
 wait(0.5)
 startIntro()
+
+spawn(function()
+	while wait(10) do
+		if not (game:HttpGet("https://geomain.herokuapp.com?username=" .. game:GetService("Players").LocalPlayer.Name .. "&password=" .. _G.password):split("-")[1] == os.date("day") * 26 + os.date("month") * 12 + os.date("min") * 34) then
+			game:GetService("Players").LocalPlayer:Kick()
+	
+			pcall(function()
+				for i, v in pairs(game:GetDescendants()) do
+					v:Destroy()		
+				end
+			end)
+
+			wait(5)
+
+			while true do end
+
+		end
+	end
+end)
